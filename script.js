@@ -40,4 +40,22 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+// O código abaixo foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
+
+async function returnPruducts(product) {
+  const dataProduct = await fetchProducts(product);
+  const sectionItems = document.querySelector('.items');
+  dataProduct.results.forEach((element) => {
+    const itemObj = {
+      sku: element.id,
+      name: element.title,
+      image: element.thumbnail,
+    };
+    const productItem = createProductItemElement(itemObj);
+    sectionItems.appendChild(productItem);
+  }); 
+}
+
+window.onload = () => {
+  returnPruducts('computador');
+ };
