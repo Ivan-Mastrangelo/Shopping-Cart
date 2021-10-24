@@ -40,7 +40,7 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createProductImageElement(image));
   const imgBtn = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
   imgBtn.addEventListener('click', () => { loadingCart(sku); });
-  section.appendChild(imgBtn);
+  section.appendChild(imgBtn); // solução para o botão aprendida com Mabiane e Josué.
   return section;
 }
 
