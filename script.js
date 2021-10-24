@@ -1,5 +1,6 @@
 function cartItemClickListener(event) {
   // coloque seu código aqui
+  event.target.remove(); // Solução desenvolvida por Eduardo Miyazaki e trazida por Josue G. Ribeiro.
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -40,7 +41,7 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createProductImageElement(image));
   const imgBtn = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
   imgBtn.addEventListener('click', () => { loadingCart(sku); });
-  section.appendChild(imgBtn); // solução para o botão aprendida com Mabiane e Josué.
+  section.appendChild(imgBtn); // solução para o botão aprendida com Mabiane e Josué Gomes Ribeiro.
   return section;
 }
 
