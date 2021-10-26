@@ -100,7 +100,7 @@ function clearItem(fact) {
 // A função replaceCart contou com ajudas importantes dos companheiros de turma de Mateus Turola e Brunão.
 
 function replaceCart() {
-  const storage = JSON.parse(localStorage.getItem('cartItems'));
+  const storage = JSON.parse(getSavedCartItems());
   if (storage !== null) {
     storage.forEach((element) => {
     const li = document.createElement('li');
