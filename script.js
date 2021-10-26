@@ -45,7 +45,8 @@ function prepareDataToLocalstore() {
   const oldList = [];
   listElement.forEach((element) => {
     oldList.push(element.innerHTML);
-    saveCartItems(oldList);
+    const list = JSON.stringify(oldList);
+    saveCartItems(list);
   });
 }
 
@@ -69,9 +70,9 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
-function getSkuFromProductItem(item) {
+/* function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
-}
+} */
 
 // O código abaixo, até a linha 90, foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
 
@@ -95,11 +96,13 @@ function clearItem(fact) {
   eraseItemLocalStorage(item);
 }
 
+// A função replaceCart contou com ajudas importantes dos companheiros de turma de Mateus Turola e Brunão.
+
 function replaceCart() {
-  if (getSavedCartItems() !== null) {
-  const storage = getSavedCartItems();
-  console.log(storage);
-  storage.forEach((element) => {
+  const storage = JSON.parse(localStorage.getItem('cartItems'));
+  if (storage !== null) {
+    console.log(storage);
+    storage.forEach((element) => {
     const li = document.createElement('li');
     li.innerText = element;
     li.className = 'cart__item';
