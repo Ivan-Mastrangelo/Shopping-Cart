@@ -1,4 +1,5 @@
 const olCartItems = document.querySelector('.cart__items');
+const clearCartBtn = document.querySelector('.empty-cart');
 
 function eraseItemLocalStorage(item) {
   const listElement = document.querySelectorAll('li');
@@ -66,7 +67,7 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createProductImageElement(image));
   const imgBtn = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
   imgBtn.addEventListener('click', () => { loadingCart(sku); });
-  section.appendChild(imgBtn); // solução para o botão aprendida com Mabiane Polniak e Josué Gomes Ribeiro.
+  section.appendChild(imgBtn); // solução para o botão aprendida com Mabiane Polniak e Josué Gomes Ribeiro, companheiros de turma.
   return section;
 }
 
@@ -74,7 +75,7 @@ function createProductItemElement({ sku, name, image }) {
   return item.querySelector('span.item__sku').innerText;
 } */
 
-// O código abaixo, até a linha 90, foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
+// O código abaixo, até a linha 92, foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
 
 async function returnPruducts(product) {
   const dataProduct = await fetchProducts(product);
@@ -101,7 +102,6 @@ function clearItem(fact) {
 function replaceCart() {
   const storage = JSON.parse(localStorage.getItem('cartItems'));
   if (storage !== null) {
-    console.log(storage);
     storage.forEach((element) => {
     const li = document.createElement('li');
     li.innerText = element;
@@ -116,3 +116,11 @@ window.onload = () => {
   returnPruducts('computador');
   replaceCart();
 };
+
+function clearLocalStore() {
+  olCartItems.innerHTML = '';
+  saveCartItems(olCartItems.innerHTML);
+  // com a colaboração do companheiro de turma Josué Gomes Ribeiro.
+}
+
+clearCartBtn.addEventListener('click', clearLocalStore);
