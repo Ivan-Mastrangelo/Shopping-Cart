@@ -1,3 +1,4 @@
+const loading = document.querySelector('.loading');
 const olCartItems = document.querySelector('.cart__items');
 const clearCartBtn = document.querySelector('.empty-cart');
 
@@ -8,6 +9,7 @@ function account() {
   listItems.forEach((price) => {
     sumPrices += parseFloat(price.split('$')[1]);
   });
+  // Métodos parseFloat e split aprendidos com o companheiro de turma Marco Severo.
   totalPrice.innerText = `${sumPrices}`;
 }
 
@@ -87,6 +89,10 @@ function createProductItemElement({ sku, name, image }) {
   return item.querySelector('span.item__sku').innerText;
 } */
 
+function removeLoadingAlert() {
+  loading.remove();
+}
+
 // O código abaixo, até a linha 92, foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
 
 async function returnPruducts(product) {
@@ -100,6 +106,7 @@ async function returnPruducts(product) {
     };
     const productItem = createProductItemElement(itemObj);
     sectionItems.appendChild(productItem);
+    removeLoadingAlert();
   }); 
 }
 
