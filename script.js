@@ -1,6 +1,16 @@
 const olCartItems = document.querySelector('.cart__items');
 const clearCartBtn = document.querySelector('.empty-cart');
 
+function account() {
+  const listItems = JSON.parse(getSavedCartItems());
+  let sumPrices = 0;
+  const totalPrice = document.querySelector('.total-price');
+  listItems.forEach((price) => {
+    sumPrices += parseFloat(price.split('$')[1]);
+  });
+  totalPrice.innerText = `${sumPrices}`;
+}
+
 function eraseItemLocalStorage(item) {
   const listElement = document.querySelectorAll('li');
   const newList = [];
@@ -9,7 +19,8 @@ function eraseItemLocalStorage(item) {
       newList.push(element.innerHTML);
     }
   });
-  saveCartItems(newList);
+  saveCartItems(JSON.stringify(newList));
+  account();
 }
 
 function cartItemClickListener(event) {
@@ -43,11 +54,11 @@ function createCustomElement(element, className, innerText) {
 
 function prepareDataToLocalstore() {
   const listElement = document.querySelectorAll('li');
-  const oldList = [];
+  const itemsToStorage = [];
   listElement.forEach((element) => {
-    oldList.push(element.innerHTML);
-    const list = JSON.stringify(oldList);
-    saveCartItems(list);
+    itemsToStorage.push(element.innerText);
+    const saveItem = JSON.stringify(itemsToStorage);
+    saveCartItems(saveItem);
   });
 }
 
@@ -57,6 +68,7 @@ async function loadingCart(id) {
   const itemInList = createCartItemElement(objToCart);
   olCartItems.appendChild(itemInList);
   prepareDataToLocalstore();
+  account();
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -101,6 +113,7 @@ function clearItem(fact) {
 
 function replaceCart() {
   const storage = JSON.parse(getSavedCartItems());
+  console.log(storage);
   if (storage !== null) {
     storage.forEach((element) => {
     const li = document.createElement('li');
@@ -108,6 +121,7 @@ function replaceCart() {
     li.className = 'cart__item';
     li.addEventListener('click', clearItem);
     olCartItems.appendChild(li);
+    account();
 });
 }
 }
@@ -118,9 +132,10 @@ window.onload = () => {
 };
 
 function clearLocalStore() {
-  olCartItems.innerHTML = '';
-  saveCartItems(olCartItems.innerHTML);
-  // com a colaboração do companheiro de turma Josué Gomes Ribeiro.
+  olCartItems.innerText = '';
+  saveCartItems(JSON.stringify([]));
+  // com a colaboração do Victor Faria da mentoria summer.
+  account();
 }
 
 clearCartBtn.addEventListener('click', clearLocalStore);
