@@ -6,20 +6,27 @@
 
 .items {
   display: flex;
-  flex-basis: 70%;
+  flex-basis: 100%;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: rgb(208, 203, 203);
+  margin-top: -10px;
+  margin-left: -10px;
 }
 
 .item {
-  border: 2px solid blue;
+  border: 10px solid blue;
   border-radius: 5px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   height: auto;
   margin: 5px;
-  width: 200px;
+  margin-top: 30px;
+  width: 250px;
+  background-color: blue;
+  color: white;
+  font-weight: bolder;
 }
 
 .item .item__sku {
@@ -37,21 +44,42 @@
 }
 
 .item .item__add {
-  background-color: green;
+  background-color: blue;
+  font-weight: bold;
+  color: white;
   border: 0;
   cursor: pointer;
   margin: 0;
-  padding: 5px;
+  padding: 6px;
+  border-radius: 5px;
 }
 
 .cart {
+  margin-top: -10px;
   display: flex;
   flex-basis: 30%;
   flex-flow: column wrap;
+  background-color: rgb(255, 149, 0);
+  border-left: 3px solid darkblue;
 }
 
 .cart .cart__title {
   flex-basis: 1;
   font-size: 16pt;
   text-align: center;
+}
+
+.cart__title {
+  padding: 3%;
+}
+
+.empty-cart {
+  background-color: aqua;
+  height: 1%;
+  width: 30%;
+  margin-left: 35%;
+  border-radius: 25px;
+}
+.bill {
+  padding-left: 2%;
 }
