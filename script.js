@@ -10,7 +10,7 @@ function account() {
     sumPrices += parseFloat(price.split('$')[1]);
   });
   // Métodos parseFloat e split aprendidos com o companheiro de turma Marco Severo.
-  totalPrice.innerText = `${sumPrices}`;
+  totalPrice.innerText = `${sumPrices.toFixed(2)}`;
 }
 
 function eraseItemLocalStorage(item) {
@@ -26,7 +26,6 @@ function eraseItemLocalStorage(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
   const item = event.target;
   event.target.remove(); // Solução desenvolvida por Eduardo Miyazaki e trazida por Josue G. Ribeiro.
   eraseItemLocalStorage(item);
@@ -85,15 +84,11 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
-/* function getSkuFromProductItem(item) {
-  return item.querySelector('span.item__sku').innerText;
-} */
-
 function removeLoadingAlert() {
   loading.remove();
 }
 
-// O código abaixo, até a linha 92, foi realizado pelo professor Bernardo Salgueiro ao explicar em vídeo como a turma deve resolver os requisios do projeto:
+// O código abaixo, até a linha 106, foi realizado com auxílio do professor Bernardo Salgueiro, ao explicar como a turma deve resolver os requisios do projeto:
 
 async function returnPruducts(product) {
   const dataProduct = await fetchProducts(product);
